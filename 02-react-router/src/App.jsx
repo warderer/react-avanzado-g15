@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
 
 function App () {
   return (
@@ -15,6 +15,7 @@ function App () {
         <Route path='/' element={<Home />} />
         <Route path='/portafolio' element={<Portafolio />} />
         <Route path='/contacto' element={<Contacto />} />
+        <Route path='*' element={<Error404 />} />
       </Routes>
       <footer><p>©Todos los derechos reservados</p></footer>
     </div>
@@ -42,6 +43,19 @@ function Contacto () {
   return (
     <div>
       <h1>Contacto</h1>
+    </div>
+  )
+}
+
+function Error404 () {
+  const location = useLocation()
+  return (
+    <div>
+      <h1>Error404</h1>
+      <p>No encontre: {location.pathname}</p>
+      <p>
+        <Link to='/'>Regresar al Home</Link>
+      </p>
     </div>
   )
 }
