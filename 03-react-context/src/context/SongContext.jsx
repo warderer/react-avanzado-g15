@@ -44,6 +44,7 @@ const useSongContext = () => {
   return context
 }
 
+// #4 Exportar las funciones del Provider y el Consumer
 export {
   SongProvider,
   useSongContext
