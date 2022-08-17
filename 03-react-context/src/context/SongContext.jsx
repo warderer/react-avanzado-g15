@@ -14,6 +14,7 @@ function SongProvider (props) {
   const [list, setList] = useState([]) // data de la API
   const [selectedSong, setSelectedSong] = useState({}) // La canción seleccionada
   const [loading, setLoading] = useState(true) // Nos va a indicar cuando los datos estan disponibles
+  const [search, setSearch] = useState('') // Guardo la palabra que busco
 
   // Simulamos llamada a la API
   useEffect(() => {
@@ -29,7 +30,9 @@ function SongProvider (props) {
     list,
     selectedSong,
     setSelectedSong,
-    loading
+    loading,
+    search,
+    setSearch
   }
 
   return (
