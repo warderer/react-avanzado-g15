@@ -1,0 +1,40 @@
+$gray-700: #3d3d3d;
+
+@mixin header-link($hover) {
+  color: $gray-700;
+  text-decoration: none;
+  letter-spacing: 2px;
+
+  @if $hover {
+    &:hover {
+      border-bottom: solid 2px $gray-700;
+    }
+  }
+}
+
+.header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  box-shadow: 0px 3px 7px rgba(100, 100, 100, 0.4);
+
+  &__logo {
+    @include header-link(false);
+  }
+
+  &__nav-list {
+    display: flex;
+    list-style: none;
+    column-gap: 20px;
+  }
+
+  &__item-link {
+    @include header-link(true);
+
+    &--is-active {
+      border-bottom: solid 2px $gray-700;
+    }
+  }
+}
