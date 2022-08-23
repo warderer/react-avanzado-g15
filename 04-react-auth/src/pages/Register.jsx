@@ -1,4 +1,17 @@
+import useForm from '@/hooks/useForm';
+
 function Register() {
+  const sendData = ()=>console.log('sendData');
+
+  const { input, handleInputChange, handleSubmit } = useForm(sendData, {
+    first_name: '',
+    last_name: '',
+    birth_date: '',
+    gender: '',	
+    email: '',
+    password: '',
+  })
+
   return (
     <form className='container'>
       <div className='mt-5 mb-3'>
@@ -7,6 +20,9 @@ function Register() {
         </label>
         <input
           type='text'
+          name='first_name'
+          onChange={handleInputChange}
+          value={input.first_name}
           className='form-control'
           id='name'
           placeholder='John'
@@ -18,6 +34,7 @@ function Register() {
         </label>
         <input
           type='text'
+          name='last-name'
           className='form-control'
           id='last-name'
           placeholder='Doe'
