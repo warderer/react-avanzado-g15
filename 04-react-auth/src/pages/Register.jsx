@@ -1,8 +1,25 @@
 import useForm from '@/hooks/useForm';
+import { RegisterUser } from '@/services/UserServices.js';
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
-  const sendData = (data) => console.log(data);
+  // Usamos el hook navigate para navegar hacia login
+  const navigate = useNavigate()
 
+  // Funcion que envia los datos
+  const sendData = async (data) => {
+    try {
+      const result = await RegisterUser(data);
+
+      if(result.status === 200) {
+        navigate('/login')
+      }
+    } catch (error) {
+      alert('Ocurrió un error: ' + error.message);
+    }
+  };
+
+  // Estado inicial con el hook useForm
   const { input, handleInputChange, handleSubmit } = useForm(sendData, {
     first_name: '',
     last_name: '',
@@ -89,7 +106,7 @@ function Register() {
         <label htmlFor='inputPassword' className='col-sm-2 col-form-label'>
           Password
         </label>
-        <div className='col-sm-10'>
+        <div>
           <input
             type='password'
             className='form-control'
