@@ -1,16 +1,16 @@
 import useForm from '@/hooks/useForm';
 
 function Register() {
-  const sendData = ()=>console.log('sendData');
+  const sendData = (data) => console.log(data);
 
   const { input, handleInputChange, handleSubmit } = useForm(sendData, {
     first_name: '',
     last_name: '',
     birth_date: '',
-    gender: '',	
+    gender: 'Select a gender',
     email: '',
     password: '',
-  })
+  });
 
   return (
     <form className='container'>
@@ -34,7 +34,9 @@ function Register() {
         </label>
         <input
           type='text'
-          name='last-name'
+          name='last_name'
+          onChange={handleInputChange}
+          value={input.last_name}
           className='form-control'
           id='last-name'
           placeholder='Doe'
@@ -44,13 +46,27 @@ function Register() {
         <label htmlFor='birth' className='form-label'>
           Birthday
         </label>
-        <input type='date' className='form-control' id='birth' />
+        <input
+          type='date'
+          className='form-control'
+          id='birth'
+          name='birth_date'
+          onChange={handleInputChange}
+          value={input.birth_date}
+        />
       </div>
       <div className='mb-3'>
         <label htmlFor='last-name' className='form-label'>
           Gender
         </label>
-        <select className='form-select'>
+        <select
+          className='form-select'
+          name='gender'
+          onChange={handleInputChange}
+          value={input.gender}>
+          <option value='Select a gender' disabled>
+            Select a gender
+          </option>
           <option value='M'>M</option>
           <option value='F'>F</option>
         </select>
@@ -64,6 +80,9 @@ function Register() {
           className='form-control'
           id='exampleFormControlInput1'
           placeholder='name@example.com'
+          name='email'
+          onChange={handleInputChange}
+          value={input.email}
         />
       </div>
       <div className='mb-3'>
@@ -71,12 +90,19 @@ function Register() {
           Password
         </label>
         <div className='col-sm-10'>
-          <input type='password' className='form-control' id='inputPassword' />
+          <input
+            type='password'
+            className='form-control'
+            id='inputPassword'
+            name='password'
+            onChange={handleInputChange}
+            value={input.password}
+          />
         </div>
       </div>
       <div className='row'>
         <div className='col-8 offset-2'>
-          <button type='button' className='btn btn-primary w-100'>
+          <button type='button' className='btn btn-primary w-100' onClick={handleSubmit}>
             Primary
           </button>
         </div>
