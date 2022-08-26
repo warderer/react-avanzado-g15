@@ -19,7 +19,6 @@ export function AuthProvider(props) {
     const token = window.sessionStorage.getItem('token')
     
     if(token) {
-      console.log('token', token)
       setIsAuth(true);
     }
   }, [])
