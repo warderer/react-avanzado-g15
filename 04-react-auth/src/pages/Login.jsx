@@ -1,14 +1,20 @@
+import { useContext } from 'react';
 import useForm from '@/hooks/useForm';
 import { LoginUser } from '@/services/UserServices.js';
+import { AuthContext } from '@/context/Auth.jsx'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+  const { loginUser } = useContext(AuthContext)
+  const navigate = useNavigate();
   // Funcion que envia los datos
   const sendData = async (data) => {
     try {
       const result = await LoginUser(data);
 
       if (result.status === 200) {
-        console.log(result)
+        loginUser(result.data.token)
+        navigate('/dashboard')
       }
     } catch (error) {
       alert('Ocurrió un error: ' + error.message);
