@@ -1,25 +1,32 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react'
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode'
 
-export const AuthContext = createContext();
+export const AuthContext = createContext()
 
-export function AuthProvider(props) {
-  const [isAuth, setIsAuth] = useState(false);
+export function AuthProvider (props) {
+  const [isAuth, setIsAuth] = useState(false)
+  const [user, setUser] = useState(null) // Info del usuario descrifrado
 
   const loginUser = (token) => {
-    window.sessionStorage.setItem('token', token);
-    setIsAuth(true);
-  };
+    window.sessionStorage.setItem('token', token)
+    const decoded = jwt_decode(token) // Decodifico el JWT y lo guardo en un objeto de JS
+    setUser(decoded)
+    setIsAuth(true)
+  }
 
   const logout = () => {
-    window.sessionStorage.removeItem('token');
-    setIsAuth(false);
-  };
+    window.sessionStorage.removeItem('token')
+    setIsAuth(false)
+  }
 
-  useEffect(()=> {
+  useEffect(() => {
     const token = window.sessionStorage.getItem('token')
-    
-    if(token) {
-      setIsAuth(true);
+
+    if (token) {
+      setIsAuth(true)
+      const decoded = jwt_decode(token) // Decodifico el JWT y lo guardo en un objeto de JS
+      setUser(decoded)
     }
   }, [])
 
@@ -27,9 +34,10 @@ export function AuthProvider(props) {
     isAuth,
     loginUser,
     logout,
-  };
+    user
+  }
 
   return (
     <AuthContext.Provider value={values}>{props.children}</AuthContext.Provider>
-  );
+  )
 }
