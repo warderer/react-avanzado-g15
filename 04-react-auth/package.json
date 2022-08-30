@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -21,6 +22,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
+    "cypress": "^10.6.0",
     "sass": "^1.54.4",
     "vite": "^3.0.7"
   },
